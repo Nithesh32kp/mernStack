@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fffbf5;
+  --foreground: #3f2417;
 }
 
 @theme inline {
@@ -10,13 +10,6 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
@@ -27,14 +20,26 @@ body {
 
 /* Small custom animations for the home hero */
 @keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-12px); }
-  100% { transform: translateY(0px); }
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
 }
 
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .animate-float {
@@ -43,4 +48,157 @@ body {
 
 .animate-fade-in {
   animation: fadeInUp 0.6s ease forwards;
+}
+
+/* ---------- Nav cookie hover (round cookie behind the word) ---------- */
+.nav-choco {
+  position: relative;
+  isolation: isolate;
+}
+
+.nav-choco-label {
+  position: relative;
+  z-index: 2;
+  transition: color 180ms ease;
+}
+
+.nav-choco:hover .nav-choco-label,
+.nav-choco:focus-visible .nav-choco-label {
+  color: #3e2723;
+  font-weight: 700;
+  text-shadow: 0 1px 0 rgba(255, 240, 200, 0.9);
+}
+
+.nav-cookie {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  border: 2px solid #b9742f;
+  background:
+    radial-gradient(
+      circle at 30% 24%,
+      rgba(255, 236, 180, 0.9) 0 8%,
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 70% 80%,
+      rgba(150, 85, 30, 0.35),
+      transparent 55%
+    ),
+    radial-gradient(circle at 50% 50%, #f0b868 0, #e3a04f 62%, #cf8838 100%);
+  box-shadow:
+    inset 0 2px 3px rgba(255, 245, 210, 0.8),
+    inset 0 -4px 6px rgba(120, 62, 22, 0.35),
+    0 4px 9px rgba(27, 14, 8, 0.35);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0.6) rotate(-10deg);
+  transition:
+    opacity 180ms ease,
+    transform 360ms cubic-bezier(0.2, 0.8, 0.25, 1);
+}
+
+/* Chocolate chunks */
+.nav-cookie-chip {
+  position: absolute;
+  width: 13px;
+  height: 10px;
+  border-radius: 45% 55% 40% 60% / 55% 45% 55% 45%;
+  background: radial-gradient(
+    ellipse at 30% 25%,
+    #7a4a30 0 14%,
+    #4a2818 55%,
+    #2b160d 100%
+  );
+  box-shadow: inset 0 1px 1px rgba(255, 213, 157, 0.3);
+}
+
+/* only top and bottom area, so the text in the middle stays clear */
+.nav-cookie-chip:nth-child(1) {
+  top: 10%;
+  left: 22%;
+  width: 13px;
+  height: 10px;
+  transform: rotate(-15deg);
+}
+.nav-cookie-chip:nth-child(2) {
+  top: 7%;
+  left: 52%;
+  width: 11px;
+  height: 9px;
+  transform: rotate(20deg);
+}
+.nav-cookie-chip:nth-child(3) {
+  top: 20%;
+  left: 74%;
+  width: 12px;
+  height: 10px;
+  transform: rotate(35deg);
+}
+.nav-cookie-chip:nth-child(4) {
+  top: 72%;
+  left: 10%;
+  width: 12px;
+  height: 10px;
+  transform: rotate(10deg);
+}
+.nav-cookie-chip:nth-child(5) {
+  top: 80%;
+  left: 40%;
+  width: 14px;
+  height: 11px;
+  transform: rotate(-25deg);
+}
+.nav-cookie-chip:nth-child(6) {
+  top: 73%;
+  left: 72%;
+  width: 11px;
+  height: 9px;
+  transform: rotate(30deg);
+}
+.nav-cookie-chip:nth-child(7) {
+  top: 84%;
+  left: 22%;
+  width: 8px;
+  height: 7px;
+  transform: rotate(-10deg);
+}
+
+.nav-choco:hover .nav-cookie,
+.nav-choco:focus-visible .nav-cookie {
+  opacity: 1;
+  animation: cookie-pop 560ms cubic-bezier(0.2, 0.8, 0.25, 1) both;
+}
+
+@keyframes cookie-pop {
+  0% {
+    transform: translate(-50%, -50%) scale(0.6) rotate(-10deg);
+  }
+  68% {
+    transform: translate(-50%, -50%) scale(1.1) rotate(4deg);
+  }
+  84% {
+    transform: translate(-50%, -50%) scale(0.97) rotate(-2deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1) rotate(0deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-cookie {
+    transition: none;
+    animation: none;
+  }
+
+  .nav-choco:hover .nav-cookie,
+  .nav-choco:focus-visible .nav-cookie {
+    opacity: 1;
+    animation: none;
+    transform: translate(-50%, -50%) scale(1) rotate(0deg);
+  }
 }

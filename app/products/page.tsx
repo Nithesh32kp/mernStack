@@ -7,7 +7,7 @@ export default function ProductsPage() {
     <main className="max-w-7xl mx-auto px-6 py-12">
       <header className="mb-8">
         <h1 className="text-4xl font-bold">Products</h1>
-        <p className="text-slate-600 mt-2">Browse our brownies, cakes and dessert cups.</p>
+        <p className="text-amber-900/70 mt-2">Browse our brownies, cakes and dessert cups.</p>
       </header>
 
       {categories.map((cat) => (
