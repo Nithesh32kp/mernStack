@@ -22,9 +22,9 @@ export default function Footer() {
         />
       </svg>
 
-      <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-10">
+      <div className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-8 px-4 py-10 sm:gap-10 sm:px-6 sm:py-12 md:grid-cols-3">
         <div>
-          <div className="inline-flex rounded-2xl border border-amber-100/15 bg-[#24140f] p-2.5 shadow-lg shadow-black/20">
+          <div className="inline-flex rounded-2xl border border-amber-100/15 bg-[#24140f] p-2.5 shadow-lg shadow-black/20 transition-all duration-300 hover:border-amber-400/60 hover:bg-amber-400/10 hover:shadow-[0_0_25px_rgba(251,191,36,0.45)] hover:backdrop-blur-md">
             <Logo className="h-24 w-36 sm:h-28 sm:w-[10.5rem]" />
           </div>
           <p className="text-sm text-amber-100/80 mt-3 max-w-xs">
@@ -73,15 +73,15 @@ export default function Footer() {
             Get tasty updates and offers.
           </p>
           <form
-            className="mt-3 flex gap-2"
+            className="mt-3 flex min-w-0 flex-col gap-2 sm:flex-row"
             onSubmit={(e) => e.preventDefault()}
           >
             <input
               aria-label="email"
-              className="flex-1 px-4 py-2 rounded-full bg-amber-50 text-[#3E2723] placeholder:text-[#8D6E63] outline-none focus:ring-2 focus:ring-amber-300"
+              className="w-full min-w-0 flex-1 rounded-full bg-amber-50 px-4 py-2 text-[#3E2723] placeholder:text-[#8D6E63] outline-none focus:ring-2 focus:ring-amber-300"
               placeholder="you@example.com"
             />
-            <button className="bg-amber-200 text-[#3E2723] font-medium px-5 py-2 rounded-full transition hover:bg-amber-300 hover:-translate-y-0.5 active:scale-95">
+            <button className="w-full whitespace-nowrap rounded-full bg-amber-200 px-5 py-2 font-medium text-[#3E2723] transition hover:-translate-y-0.5 hover:bg-amber-300 active:scale-95 sm:w-auto">
               Subscribe
             </button>
           </form>
@@ -89,7 +89,7 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-amber-100/10">
-        <div className="max-w-7xl mx-auto px-6 py-4 text-sm text-amber-200/80 flex flex-col items-center gap-2 text-center sm:flex-row sm:justify-between sm:text-left">
+        <div className="mx-auto flex w-full max-w-7xl flex-col items-center gap-2 px-4 py-4 text-center text-sm text-amber-200/80 sm:flex-row sm:justify-between sm:px-6 sm:text-left">
           <span>© {new Date().getFullYear()} Bakes by Yazh</span>
           <span>Made with ❤️ — Freshly baked</span>
         </div>

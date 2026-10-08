@@ -4,9 +4,9 @@ import ProductCard from '../../components/ProductCard';
 
 export default function ProductsPage() {
   return (
-    <main className="max-w-7xl mx-auto px-6 py-12">
+    <main className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 sm:py-12">
       <header className="mb-8">
-        <h1 className="text-4xl font-bold">Products</h1>
+        <h1 className="text-3xl font-bold sm:text-4xl">Products</h1>
         <p className="text-amber-900/70 mt-2">Browse our brownies, cakes and dessert cups.</p>
       </header>
 

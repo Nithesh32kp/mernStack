@@ -14,8 +14,8 @@ export default function InfoPage({
   note,
 }: InfoPageProps) {
   return (
-    <main className="flex-1 px-5 py-12 sm:px-6 sm:py-16">
-      <section className="mx-auto max-w-3xl rounded-3xl border border-amber-100 bg-white/80 p-6 shadow-xl shadow-amber-950/5 sm:p-10">
+    <main className="w-full flex-1 px-4 py-8 sm:px-6 sm:py-16">
+      <section className="mx-auto w-full max-w-3xl rounded-3xl border border-amber-100 bg-white/80 p-5 shadow-xl shadow-amber-950/5 sm:p-10">
         <p className="text-xs font-bold uppercase tracking-[0.2em] text-amber-700">
           {eyebrow}
         </p>

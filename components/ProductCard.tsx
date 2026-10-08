@@ -1,5 +1,6 @@
 import React from 'react';
 import type { Product } from '../data/products';
+import { getWhatsAppOrderUrl } from '../data/whatsapp';
 
 export default function ProductCard({ product }: { product: Product }) {
   return (
@@ -13,7 +14,14 @@ export default function ProductCard({ product }: { product: Product }) {
 
       <div className="flex items-center justify-between mt-4">
         <div className="text-xl font-bold">{product.priceLabel ? `${product.priceLabel} ₹${product.price}` : `₹${product.price}`}</div>
-        <button className="bg-amber-600 text-white px-3 py-1 rounded-md text-sm hover:bg-amber-700">Add</button>
+        <a
+          href={getWhatsAppOrderUrl(product.name)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="shrink-0 rounded-md bg-amber-600 px-3 py-2 text-center text-sm text-white transition hover:bg-amber-700"
+        >
+          Order
+        </a>
       </div>
     </div>
   );

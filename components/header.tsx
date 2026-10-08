@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Logo from "./Logo";
 import { ChevronDown, Menu, ShoppingCart, Truck, X } from "lucide-react";
+import { getWhatsAppOrderUrl } from "@/data/whatsapp";
 
 type MenuItem = { name: string; price: number; priceLabel?: string };
 type MenuGroup = { category: string; items: MenuItem[] };
@@ -145,13 +146,16 @@ function Header() {
         </nav>
 
         <div className="flex items-center gap-2 sm:gap-3">
-          <button
+          <a
+            href={getWhatsAppOrderUrl()}
+            target="_blank"
+            rel="noopener noreferrer"
             aria-label="Order now"
             className="flex items-center gap-2 bg-amber-100 text-[#3E2723] px-3 sm:px-5 py-2 rounded-md text-sm sm:text-base font-medium hover:bg-amber-200 transition"
           >
             <Truck size={18} />
             <span className="hidden sm:inline">Order Now</span>
-          </button>
+          </a>
 
           <button
             aria-label={`Shopping cart, ${cartCount} items`}
