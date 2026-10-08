@@ -38,17 +38,8 @@ const menuDetails: MenuGroup[] = [
   },
 ];
 
-const navLink = "nav-choco px-4 py-2 rounded-full text-amber-100/90";
-
-function CookieDecoration() {
-  return (
-    <span className="nav-cookie" aria-hidden="true">
-      {Array.from({ length: 7 }, (_, index) => (
-        <span className="nav-cookie-chip" key={index} />
-      ))}
-    </span>
-  );
-}
+const navLink =
+  "nav-choco relative inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-medium focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-200";
 
 function Header() {
   const cartCount = 5;
@@ -62,17 +53,18 @@ function Header() {
           <Logo className="h-10 w-[3.75rem] sm:h-12 sm:w-[4.5rem] lg:h-14 lg:w-[5.25rem]" />
         </div>
 
-        <nav aria-label="Main navigation" className="hidden lg:flex items-center gap-3 font-medium">
+        <nav
+          aria-label="Main navigation"
+          className="hidden lg:flex items-center gap-3 font-medium"
+        >
           <Link href="/" className={navLink}>
-            <span className="nav-choco-label">Home</span>
-            <CookieDecoration />
+            Home
           </Link>
 
           {/* Products + submenu */}
           <div className="relative group">
-            <Link href="/products" className={`${navLink} inline-block`}>
-              <span className="nav-choco-label">Products</span>
-              <CookieDecoration />
+            <Link href="/products" className={navLink}>
+              Products
             </Link>
 
             <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 hidden group-hover:block group-focus-within:block z-50">
@@ -132,16 +124,13 @@ function Header() {
           </div>
 
           <Link href="/parcel" className={navLink}>
-            <span className="nav-choco-label">Parcel</span>
-            <CookieDecoration />
+            Parcel
           </Link>
           <Link href="/location" className={navLink}>
-            <span className="nav-choco-label">Location</span>
-            <CookieDecoration />
+            Location
           </Link>
           <Link href="/contact" className={navLink}>
-            <span className="nav-choco-label">Contact</span>
-            <CookieDecoration />
+            Contact
           </Link>
         </nav>
 
@@ -169,7 +158,11 @@ function Header() {
 
           <button
             type="button"
-            aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-label={
+              isMobileMenuOpen
+                ? "Close navigation menu"
+                : "Open navigation menu"
+            }
             aria-expanded={isMobileMenuOpen}
             aria-controls="mobile-navigation"
             onClick={() => setIsMobileMenuOpen((isOpen) => !isOpen)}
@@ -208,9 +201,7 @@ function Header() {
                 type="button"
                 aria-label="Toggle today's menu"
                 aria-expanded={isMobileProductsOpen}
-                onClick={() =>
-                  setIsMobileProductsOpen((isOpen) => !isOpen)
-                }
+                onClick={() => setIsMobileProductsOpen((isOpen) => !isOpen)}
                 className="rounded-full p-2 text-amber-100/90 transition hover:bg-white/10"
               >
                 <ChevronDown
@@ -234,8 +225,8 @@ function Header() {
                         >
                           <span>{item.name}</span>
                           <span className="shrink-0 whitespace-nowrap text-amber-100/70">
-                            {item.priceLabel && `${item.priceLabel} `}
-                            ₹{item.price}
+                            {item.priceLabel && `${item.priceLabel} `}₹
+                            {item.price}
                           </span>
                         </li>
                       ))}
