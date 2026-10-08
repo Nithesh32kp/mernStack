@@ -1,8 +1,8 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import Logo from "./Logo";
-import { ShoppingCart, Truck } from "lucide-react";
+import { ChevronDown, Menu, ShoppingCart, Truck, X } from "lucide-react";
 
 type MenuItem = { name: string; price: number; priceLabel?: string };
 type MenuGroup = { category: string; items: MenuItem[] };
@@ -51,15 +51,17 @@ function CookieDecoration() {
 
 function Header() {
   const cartCount = 5;
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobileProductsOpen, setIsMobileProductsOpen] = useState(false);
 
   return (
     <header className="relative z-50 w-full bg-gradient-to-r from-[#3E2723] via-[#4E342E] to-[#5D4037]">
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-3 py-3">
-        <div className="text-xl font-bold text-white bg-amber-50 rounded-full p-0.5 w-fit aspect-square flex items-center justify-center">
-          <Logo />
+      <div className="max-w-7xl mx-auto flex items-center justify-between px-3 py-3 sm:px-5">
+        <div className="shrink-0">
+          <Logo className="h-10 w-[3.75rem] sm:h-12 sm:w-[4.5rem] lg:h-14 lg:w-[5.25rem]" />
         </div>
 
-        <nav className="hidden md:flex items-center gap-3 font-medium">
+        <nav aria-label="Main navigation" className="hidden lg:flex items-center gap-3 font-medium">
           <Link href="/" className={navLink}>
             <span className="nav-choco-label">Home</span>
             <CookieDecoration />
@@ -128,34 +130,153 @@ function Header() {
             </div>
           </div>
 
-          <a href="#" className={navLink}>
+          <Link href="/parcel" className={navLink}>
             <span className="nav-choco-label">Parcel</span>
             <CookieDecoration />
-          </a>
-          <a href="#" className={navLink}>
+          </Link>
+          <Link href="/location" className={navLink}>
             <span className="nav-choco-label">Location</span>
             <CookieDecoration />
-          </a>
-          <a href="#" className={navLink}>
+          </Link>
+          <Link href="/contact" className={navLink}>
             <span className="nav-choco-label">Contact</span>
             <CookieDecoration />
-          </a>
+          </Link>
         </nav>
 
-        <div className="flex items-center gap-4">
-          <button className="flex items-center gap-2 bg-amber-100 text-[#3E2723] px-5 py-2 rounded-md font-medium hover:bg-amber-200 transition">
+        <div className="flex items-center gap-2 sm:gap-3">
+          <button
+            aria-label="Order now"
+            className="flex items-center gap-2 bg-amber-100 text-[#3E2723] px-3 sm:px-5 py-2 rounded-md text-sm sm:text-base font-medium hover:bg-amber-200 transition"
+          >
             <Truck size={18} />
-            Order Now
+            <span className="hidden sm:inline">Order Now</span>
           </button>
 
-          <button className="relative bg-[#6D4C41] text-white p-3 rounded-full hover:bg-[#8D6E63] transition">
+          <button
+            aria-label={`Shopping cart, ${cartCount} items`}
+            className="relative bg-[#6D4C41] text-white p-2.5 sm:p-3 rounded-full hover:bg-[#8D6E63] transition"
+          >
             <ShoppingCart size={18} />
             <span className="absolute -top-1 -right-1 bg-amber-200 text-[#3E2723] text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">
               {cartCount}
             </span>
           </button>
+
+          <button
+            type="button"
+            aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-navigation"
+            onClick={() => setIsMobileMenuOpen((isOpen) => !isOpen)}
+            className="inline-flex items-center justify-center rounded-full bg-[#6D4C41] p-2.5 text-white transition hover:bg-[#8D6E63] lg:hidden"
+          >
+            {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
         </div>
       </div>
+
+      <nav
+        id="mobile-navigation"
+        aria-label="Mobile navigation"
+        className={`${isMobileMenuOpen ? "block" : "hidden"} absolute inset-x-0 top-full z-50 max-h-[calc(100dvh-4rem)] overflow-y-auto border-t border-amber-100/15 bg-gradient-to-b from-[#3E2723] to-[#2B1B17] px-4 pb-4 pt-2 shadow-xl lg:hidden`}
+      >
+        <ul className="mx-auto max-w-7xl divide-y divide-amber-100/10 text-sm font-medium">
+          <li>
+            <Link
+              href="/"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="block py-3 text-amber-100/90 transition hover:text-amber-200"
+            >
+              Home
+            </Link>
+          </li>
+          <li className="py-2">
+            <div className="flex items-center justify-between gap-3">
+              <Link
+                href="/products"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="py-1 text-amber-100/90 transition hover:text-amber-200"
+              >
+                Products
+              </Link>
+              <button
+                type="button"
+                aria-label="Toggle today's menu"
+                aria-expanded={isMobileProductsOpen}
+                onClick={() =>
+                  setIsMobileProductsOpen((isOpen) => !isOpen)
+                }
+                className="rounded-full p-2 text-amber-100/90 transition hover:bg-white/10"
+              >
+                <ChevronDown
+                  size={18}
+                  className={`transition-transform ${isMobileProductsOpen ? "rotate-180" : ""}`}
+                />
+              </button>
+            </div>
+            {isMobileProductsOpen && (
+              <div className="mt-1 max-h-72 space-y-4 overflow-y-auto rounded-xl bg-[#2B1B17]/70 p-3">
+                {menuDetails.map((menu) => (
+                  <div key={menu.category}>
+                    <p className="mb-2 text-[11px] font-bold uppercase tracking-widest text-amber-300">
+                      {menu.category}
+                    </p>
+                    <ul className="space-y-2">
+                      {menu.items.map((item) => (
+                        <li
+                          key={item.name}
+                          className="flex items-start justify-between gap-3 text-amber-50/90"
+                        >
+                          <span>{item.name}</span>
+                          <span className="shrink-0 whitespace-nowrap text-amber-100/70">
+                            {item.priceLabel && `${item.priceLabel} `}
+                            ₹{item.price}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+                <Link
+                  href="/products"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="inline-block pt-1 font-semibold text-amber-300 hover:text-amber-200"
+                >
+                  View full menu →
+                </Link>
+              </div>
+            )}
+          </li>
+          <li>
+            <Link
+              href="/parcel"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="block py-3 text-amber-100/90 transition hover:text-amber-200"
+            >
+              Parcel
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/location"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="block py-3 text-amber-100/90 transition hover:text-amber-200"
+            >
+              Location
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/contact"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="block py-3 text-amber-100/90 transition hover:text-amber-200"
+            >
+              Contact
+            </Link>
+          </li>
+        </ul>
+      </nav>
     </header>
   );
 }

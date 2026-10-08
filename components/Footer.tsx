@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import Logo from "./Logo";
 
 const linkClass =
   "inline-block text-amber-100/80 transition-all duration-300 hover:text-amber-300 hover:translate-x-1";
@@ -23,9 +24,9 @@ export default function Footer() {
 
       <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-10">
         <div>
-          <h3 className="font-serif font-bold text-2xl text-amber-200">
-            Bakes by Yazh
-          </h3>
+          <div className="inline-flex rounded-2xl border border-amber-100/15 bg-[#24140f] p-2.5 shadow-lg shadow-black/20">
+            <Logo className="h-24 w-36 sm:h-28 sm:w-[10.5rem]" />
+          </div>
           <p className="text-sm text-amber-100/80 mt-3 max-w-xs">
             Homemade with love — brownies, cakes and sweet treats.
           </p>
@@ -47,14 +48,19 @@ export default function Footer() {
               </Link>
             </li>
             <li>
-              <a href="#" className={linkClass}>
+              <Link href="/contact" className={linkClass}>
                 Contact
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className={linkClass}>
+              <Link href="/location" className={linkClass}>
                 Location
-              </a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/parcel" className={linkClass}>
+                Parcel
+              </Link>
             </li>
           </ul>
         </div>
@@ -83,7 +89,7 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-amber-100/10">
-        <div className="max-w-7xl mx-auto px-6 py-4 text-sm text-amber-200/80 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-6 py-4 text-sm text-amber-200/80 flex flex-col items-center gap-2 text-center sm:flex-row sm:justify-between sm:text-left">
           <span>© {new Date().getFullYear()} Bakes by Yazh</span>
           <span>Made with ❤️ — Freshly baked</span>
         </div>

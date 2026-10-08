@@ -5,26 +5,21 @@ import Image from "next/image";
 
 type LogoProps = {
     onClick?: () => void;
+    className?: string;
 };
 
-export default function Logo({ onClick }: LogoProps) {
+export default function Logo({
+    onClick,
+    className = "h-12 w-[4.5rem] object-contain",
+}: LogoProps) {
     return (
-        <Link href="/" onClick={onClick}>
-            {/* Mobile: icon-mark logo */}
+        <Link href="/" onClick={onClick} aria-label="Bakes by Yazh home">
             <Image
                 src="/logo.png"
-                alt="Bhangaru Kalasam Jewellers"
-                width={60}
-                height={60}
-                className="h-12 w-auto sm:hidden"
-            />
-            {/* Tablet & up: full wordmark logo */}
-            <Image
-                src="/logo.png"
-                alt="Bhangaru Kalasam Jewellers"
-                width={200}
-                height={60}
-                className="hidden sm:block h-12 w-auto flex justify-end items-center"
+                alt="Bakes by Yazh"
+                width={1536}
+                height={1024}
+                className={`block object-contain ${className}`}
             />
         </Link>
     );
